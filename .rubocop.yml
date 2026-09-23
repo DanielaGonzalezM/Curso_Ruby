@@ -1,0 +1,12 @@
+# Configuración de RuboCop para este proyecto de aprendizaje.
+# Se desactivan/ajustan algunos cops que no tienen sentido en archivos
+# de ejemplo, donde muchas veces se declaran variables solo para mostrar
+# cómo funcionan, sin necesariamente usarlas después.
+
+# No eliminar ni avisar de variables asignadas pero no utilizadas
+Lint/UselessAssignment:
+  Enabled: false
+
+# No exigir documentación en clases/módulos (no aplica a scripts de ejemplo)
+Style/Documentation:
+  Enabled: false

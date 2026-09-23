@@ -1,0 +1,16 @@
+# Ruby LSP (bundle interno generado automáticamente por la extensión)
+/.ruby-lsp/
+
+# Bundler
+/.bundle/
+/vendor/bundle/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Archivos de entorno (si más adelante usás variables sensibles)
+.env
