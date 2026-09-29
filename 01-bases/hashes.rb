@@ -73,6 +73,58 @@ usuario = {
 puts usuario[:direccion][:ciudad] # => "Bogotá"
 puts usuario[:hobbies].first # => "leer"
 
+# 11.1 Recorrer un hash con más de un nivel
+empresa = {
+  nombre: 'Acme',
+  empleados: {
+    ana: { edad: 30, puesto: 'Dev' },
+    luis: { edad: 25, puesto: 'QA' }
+  }
+}
+
+# recorrer el nivel superior normalmente...
+empresa.each do |clave, valor|
+  puts "#{clave}: #{valor}"
+end
+
+# ...pero para el hash anidado, necesitas otro each dentro
+empresa[:empleados].each do |nombre_emp, datos|
+  puts "#{nombre_emp} tiene #{datos[:edad]} años y es #{datos[:puesto]}"
+end
+
+# forma equivalente, recorriendo TODO el hash con un solo each anidado
+empresa.each do |clave, valor|
+  if valor.is_a?(Hash)
+    puts "#{clave}:"
+    valor.each do |sub_clave, sub_valor|
+      # si el valor también fuera un Hash, aquí se anidaría OTRO each
+      if sub_valor.is_a?(Hash)
+        puts "  #{sub_clave}:"
+        sub_valor.each { |k, v| puts "    #{k}: #{v}" }
+      else
+        puts "  #{sub_clave}: #{sub_valor}"
+      end
+    end
+  else
+    puts "#{clave}: #{valor}"
+  end
+end
+
+# forma recursiva (útil cuando no sabes cuántos niveles de anidamiento hay)
+def imprimir_hash(hash, nivel = 0)
+  hash.each do |clave, valor|
+    indentacion = '  ' * nivel
+    if valor.is_a?(Hash)
+      puts "#{indentacion}#{clave}:"
+      imprimir_hash(valor, nivel + 1) # se llama a sí misma con el sub-hash
+    else
+      puts "#{indentacion}#{clave}: #{valor}"
+    end
+  end
+end
+
+imprimir_hash(empresa)
+
 # 12. Convertir entre hash y array
 pares = persona2.to_a
 p pares # => [[:nombre, "Luis"], [:edad, 26]]
